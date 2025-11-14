@@ -1,0 +1,68 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime / PID files
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Environment files (keep examples)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Build / output
+dist/
+build/
+out/
+lib/
+esm/
+.next/
+.cache/
+.parcel-cache/
+.nyc_output/
+coverage/
+*.tsbuildinfo
+*.map
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# OS & editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.sublime-workspace
+*.sw?
+.session
+
+# Caches & temp
+node_repl_history
+tmp/
+temp/
+.cache/
+
+# SSL / keys / secrets
+*.pem
+*.key
+*.crt
+secrets.yml
+
+# Misc
+.envrc
+*.bak
+*.swp
