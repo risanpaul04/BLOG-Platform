@@ -18,7 +18,8 @@ const userSchema = mongoose.Schema({
 
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
 
     role: {
@@ -61,11 +62,43 @@ const userSchema = mongoose.Schema({
         instagram: String,
         github: String,
         linkedin: String
-    }
+    },
 
+    refreshTokens: [{
+        token: {
+            type: String,
+            required: true
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        },
+        expiresAt: {
+            type: Date,
+            required: true
+        },
+
+        userAgent: String,
+        ipAddress: String
+    }],
+
+    maxSessions: {
+        type: Number,
+        default: 2
+    }
 
 }, {
     timestamps: true
+})
+
+userSchema.pre('save', function(next) {
+    if(this.refreshTokens) {
+        this.refreshTokens = this.refreshTokens.filter(
+            token => new Date(token.expiresAt) > new Date
+        );
+    }
+    
+    next();
 })
 
 export default User = mongoose.model('User', userSchema)

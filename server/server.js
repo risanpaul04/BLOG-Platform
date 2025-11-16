@@ -1,19 +1,31 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import connectDB from './config/connectDB.js'
+import routes from './routes/main.routes.js';
 
 const app = express();
 
 dotenv.config();
 
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
+
+app.use(cookieParser());
+
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({extended: true}));
 
-connectDB()
+// API Routes
+app.use('/api', routes);
 
-const port = process.env.PORT || 5500
+// DataBase Connection
+connectDB();
 
+const port = process.env.PORT || 3000
 
 app.listen(port, ()=> {
     console.log(`Connected to port http://localhost:${port}`)
